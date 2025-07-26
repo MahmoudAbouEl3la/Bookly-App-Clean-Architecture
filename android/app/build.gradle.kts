@@ -8,7 +8,7 @@ plugins {
 android {
     namespace = "com.example.bookly_app_with_clean_architecture"
     compileSdk = flutter.compileSdkVersion
-    ndkVersion = flutter.ndkVersion
+    // ndkVersion = "29.0.13113456"
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
