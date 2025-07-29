@@ -1,6 +1,7 @@
 import 'package:bookly_app_with_clean_architecture/core/styles.dart';
 import 'package:bookly_app_with_clean_architecture/core/widgets/image_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class BestSellerListViewItem extends StatelessWidget {
   const BestSellerListViewItem({super.key});
@@ -25,15 +26,15 @@ class BestSellerListViewItem extends StatelessWidget {
                   maxLines: 2,
 
                   'Conepts of Computer\nScience',
-                  style: Styles.titleMedium,
+                  style: Styles.font18W600,
                 ),
               ),
               const SizedBox(height: 10),
               Text(
                 'Sanjeev Thakur',
-                style: Styles.titleSmall.copyWith(
+                style: Styles.font16W600.copyWith(
                   color: Colors.grey,
-                  fontFamily: 'Poppins',
+                  fontFamily: GoogleFonts.nixieOne().fontFamily,
                 ),
               ),
               const SizedBox(height: 10),
@@ -42,17 +43,15 @@ class BestSellerListViewItem extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text('Free', style: Styles.titleMedium),
+                    Text('Free', style: Styles.font18W600),
                     Row(
                       children: [
                         const Icon(Icons.star, color: Colors.yellow),
-                        Text('4.9', style: Styles.titleMedium),
+                        Text('4.9', style: Styles.font18W600),
                         SizedBox(width: 8),
                         Text(
                           '(2508)',
-                          style: Styles.titleMedium.copyWith(
-                            color: Colors.grey,
-                          ),
+                          style: Styles.font18W600.copyWith(color: Colors.grey),
                         ),
                       ],
                     ),
