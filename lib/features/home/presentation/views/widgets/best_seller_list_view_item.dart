@@ -1,5 +1,7 @@
+import 'package:bookly_app_with_clean_architecture/constans.dart';
 import 'package:bookly_app_with_clean_architecture/core/styles.dart';
 import 'package:bookly_app_with_clean_architecture/core/widgets/image_widget.dart';
+import 'package:bookly_app_with_clean_architecture/features/home/presentation/views/widgets/book_rating.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -14,51 +16,52 @@ class BestSellerListViewItem extends StatelessWidget {
       child: Row(
         children: [
           ImageWidget(),
-          const SizedBox(width: 12),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(right: 20),
-                child: Text(
-                  textAlign: TextAlign.left,
-                  maxLines: 2,
-
-                  'Conepts of Computer\nScience',
-                  style: Styles.font18W600,
-                ),
-              ),
-              const SizedBox(height: 10),
-              Text(
-                'Sanjeev Thakur',
-                style: Styles.font16W600.copyWith(
-                  color: Colors.grey,
-                  fontFamily: GoogleFonts.nixieOne().fontFamily,
-                ),
-              ),
-              const SizedBox(height: 10),
-              Container(
-                color: Colors.blueGrey,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text('Free', style: Styles.font18W600),
-                    Row(
-                      children: [
-                        const Icon(Icons.star, color: Colors.yellow),
-                        Text('4.9', style: Styles.font18W600),
-                        SizedBox(width: 8),
-                        Text(
-                          '(2508)',
-                          style: Styles.font18W600.copyWith(color: Colors.grey),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  SizedBox(
+                    width: MediaQuery.sizeOf(context).width * 0.5,
+                    child: FittedBox(
+                      child: Text(
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        'Conepts of Computer Science',
+                        style: Styles.font20Normal.copyWith(
+                          fontFamily: kGtSectraFine,
                         ),
-                      ],
+                      ),
                     ),
-                  ],
-                ),
+                  ),
+                  const SizedBox(height: 4),
+                  FittedBox(
+                    child: Text(
+                      'Sanjeev Thakur',
+                      style: Styles.font16W600.copyWith(
+                        color: Colors.grey,
+                        fontFamily: GoogleFonts.nixieOne().fontFamily,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        '19.99€',
+                        style: Styles.font18W600.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      BookRating(),
+                    ],
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
         ],
       ),
