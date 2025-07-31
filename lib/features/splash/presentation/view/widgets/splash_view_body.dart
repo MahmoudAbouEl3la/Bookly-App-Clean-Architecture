@@ -1,5 +1,5 @@
 import 'package:bookly_app_with_clean_architecture/constans.dart';
-import 'package:bookly_app_with_clean_architecture/features/home/presentation/views/home_view.dart';
+import 'package:bookly_app_with_clean_architecture/core/utilis/routes.dart';
 import 'package:bookly_app_with_clean_architecture/features/splash/presentation/view/widgets/sliding_text.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -57,13 +57,8 @@ class _SplashViewBodyState extends State<SplashViewBody>
   void navigateToHome() {
     Future.delayed(const Duration(milliseconds: 2700), () {
       if (mounted) {
-        GoRouter.of(context).push("/homeView");
+        GoRouter.of(context).push(Routes.homeView);
       }
-      // Get.to(
-      //   HomeView(),
-      //   transition: Transition.leftToRight,
-      //   duration: kTransitiionDuration,
-      // );
     });
   }
 }

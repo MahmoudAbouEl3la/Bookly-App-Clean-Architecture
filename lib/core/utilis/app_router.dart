@@ -1,3 +1,5 @@
+import 'package:bookly_app_with_clean_architecture/core/utilis/routes.dart';
+import 'package:bookly_app_with_clean_architecture/features/home/presentation/views/book_details_view.dart';
 import 'package:bookly_app_with_clean_architecture/features/home/presentation/views/home_view.dart';
 import 'package:bookly_app_with_clean_architecture/features/splash/presentation/view/splash_view.dart';
 import 'package:flutter/material.dart';
@@ -7,15 +9,21 @@ abstract class AppRouter {
   static final GoRouter router = GoRouter(
     routes: [
       GoRoute(
-        path: '/',
+        path: Routes.splashView,
         builder: (BuildContext context, GoRouterState state) {
           return const SplashView();
         },
       ),
       GoRoute(
-        path: '/homeView',
+        path: Routes.homeView,
         builder: (BuildContext context, GoRouterState state) {
           return const HomeView();
+        },
+      ),
+      GoRoute(
+        path: Routes.bookDetailsView,
+        builder: (BuildContext context, GoRouterState state) {
+          return const BookDetailsView();
         },
       ),
     ],
