@@ -1,4 +1,4 @@
-import 'package:bookly_app_with_clean_architecture/core/widgets/image_widget.dart';
+import 'package:bookly_app_with_clean_architecture/core/widgets/custom_book_image.dart';
 import 'package:flutter/material.dart';
 
 class FeaturedListViewItem extends StatelessWidget {
@@ -6,6 +6,6 @@ class FeaturedListViewItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ImageWidget();
+    return CustomBookImage();
   }
 }

@@ -9,6 +9,7 @@ class HomeViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.sizeOf(context).height;
     return CustomScrollView(
       slivers: [
         SliverToBoxAdapter(
@@ -20,9 +21,9 @@ class HomeViewBody extends StatelessWidget {
                 child: CustomAppBar(),
               ),
               const FeaturedBooksListView(),
-              SizedBox(height: 40),
+              SizedBox(height: height * 0.065),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
+                padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
                 child: Text('Best Seller', style: Styles.font18W600),
               ),
             ],
