@@ -1,7 +1,7 @@
 import 'package:bookly_app_with_clean_architecture/constans.dart';
 import 'package:bookly_app_with_clean_architecture/core/styles.dart';
 import 'package:bookly_app_with_clean_architecture/core/widgets/custom_book_image.dart';
-import 'package:bookly_app_with_clean_architecture/features/home/presentation/views/widgets/book_rating.dart';
+import 'package:bookly_app_with_clean_architecture/core/widgets/book_rating.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
