@@ -1,4 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:bookly_app_with_clean_architecture/constans.dart';
+import 'package:bookly_app_with_clean_architecture/core/functions/save_local_books_data.dart';
 import 'package:bookly_app_with_clean_architecture/core/utilis/api_service.dart';
 import 'package:bookly_app_with_clean_architecture/features/home/data/data_source/remote_data_source/home_remote_data_source.dart';
 import 'package:bookly_app_with_clean_architecture/features/home/data/models/book_model/book_model.dart';
@@ -20,6 +22,7 @@ class HomeRemoteDataSourceImp extends HomeRemoteDataSource {
       endPoint: "volumes?q=programming&Filtering=free-ebooks",
     );
     List<BookEntity> books = getBooksList(data);
+    saveLocalBooksData(books, kFeaturedBox);
     return books;
   }
 
