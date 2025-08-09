@@ -7,8 +7,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 void main() async {
+  await Hive.initFlutter();
   Hive.registerAdapter(BookEntityAdapter());
   await Hive.openBox(kFeaturedBox);
+  await Hive.openBox(kNewestBox);
   runApp(DevicePreview(enabled: true, builder: (context) => BooklyApp()));
 }
 

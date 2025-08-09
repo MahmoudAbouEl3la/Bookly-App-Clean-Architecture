@@ -4,6 +4,7 @@ const kPrimaryColor = Color(0xff100b20);
 const kTransitiionDuration = Duration(milliseconds: 350);
 const kGtSectraFine = 'GT Sectra Fine';
 const kFeaturedBox = "featuredBox";
+const kNewestBox = "newestBox";
 
 class ImagePath {
   static const String kLogoImage = 'assets/images/Logo.png';
