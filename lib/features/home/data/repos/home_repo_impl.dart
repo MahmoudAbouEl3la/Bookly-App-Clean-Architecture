@@ -18,28 +18,30 @@ class HomeRepoImpl extends HomeRepo {
   @override
   Future<Either<Failures, List<BookEntity>>> fetchFeaturedBooks() async {
     try {
-      var localData = homeLocalDataSource.fetchFeaturedBooks();
-      if (localData.isNotEmpty) {
-        return Right(localData);
+      List<BookEntity> books;
+      books = homeLocalDataSource.fetchFeaturedBooks();
+      if (books.isNotEmpty) {
+        return Right(books);
       }
-      var remoteData = await homeRemoteDataSource.fetchFeaturedBooks();
-      return Right(remoteData);
+      books = await homeRemoteDataSource.fetchFeaturedBooks();
+      return Right(books);
     } catch (e) {
-      return Left(Failures());
+      return Left(ServerFailures(message: e.toString()));
     }
   }
 
   @override
   Future<Either<Failures, List<BookEntity>>> fetchNewestBooks() async {
     try {
-      var localData = homeLocalDataSource.fetchNewestBooks();
-      if (localData.isNotEmpty) {
-        return Right(localData);
+      List<BookEntity> books;
+      books = homeLocalDataSource.fetchNewestBooks();
+      if (books.isNotEmpty) {
+        return Right(books);
       }
-      var remoteData = await homeRemoteDataSource.fetchNewestBooks();
-      return Right(remoteData);
+      books = await homeRemoteDataSource.fetchNewestBooks();
+      return Right(books);
     } catch (e) {
-      return Left(Failures());
+      return Left(ServerFailures(message: e.toString()));
     }
   }
 }
