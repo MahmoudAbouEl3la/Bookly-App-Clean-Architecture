@@ -11,12 +11,28 @@ class ServerFailures extends Failures {
   factory ServerFailures.fromDioError(DioException error) {
     switch (error.type) {
       case DioExceptionType.badResponse:
+        final statusCode = error.response?.statusCode;
         final errorData = error.response?.data;
-        final errorMessage =
-            errorData is Map<String, dynamic> && errorData['error'] is String
-                ? errorData['error']
-                : 'Something went wrong';
-        return ServerFailures(message: errorMessage);
+
+        // جلب الرسالة من السيرفر إذا موجودة
+        String? serverMessage;
+        if (errorData is Map<String, dynamic>) {
+          if (errorData['error'] is String) {
+            serverMessage = errorData['error'];
+          } else if (errorData['message'] is String) {
+            serverMessage = errorData['message'];
+          }
+        }
+
+        // إذا وجدنا رسالة من السيرفر نعرضها، وإلا نستعمل fromResponse
+        if (statusCode != null) {
+          return ServerFailures.fromResponse(
+            statusCode,
+            serverMessage ?? errorData,
+          );
+        }
+
+        return ServerFailures(message: serverMessage ?? 'Something went wrong');
 
       case DioExceptionType.cancel:
         return ServerFailures(message: 'Request to API server was cancelled');
@@ -45,6 +61,51 @@ class ServerFailures extends Failures {
 
       default:
         return ServerFailures(message: 'Oops something went wrong');
+    }
+  }
+
+  factory ServerFailures.fromResponse(int statusCode, dynamic response) {
+    // إذا فيه رسالة جاهزة من السيرفر نعرضها مباشرة
+    if (response is String && response.isNotEmpty) {
+      return ServerFailures(message: response);
+    }
+    if (response is Map<String, dynamic>) {
+      if (response['error'] is String) {
+        return ServerFailures(message: response['error']);
+      }
+      if (response['message'] is String) {
+        return ServerFailures(message: response['message']);
+      }
+    }
+
+    // رسائل افتراضية بناءً على الكود
+    switch (statusCode) {
+      case 400:
+        return ServerFailures(
+          message: "Bad Request: The server could not understand your request.",
+        );
+      case 401:
+        return ServerFailures(
+          message:
+              "Unauthorized: Please check your authentication credentials.",
+        );
+      case 403:
+        return ServerFailures(
+          message:
+              "Forbidden: You do not have permission to access this resource.",
+        );
+      case 404:
+        return ServerFailures(
+          message: "Not Found: The requested resource could not be found.",
+        );
+      case 500:
+        return ServerFailures(
+          message: "Internal Server Error: Something went wrong on the server.",
+        );
+      default:
+        return ServerFailures(
+          message: "Unexpected Error: Status code $statusCode.",
+        );
     }
   }
 }
