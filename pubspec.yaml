@@ -8,6 +8,7 @@ environment:
   sdk: ^3.7.2
 
 dependencies:
+  bloc: ^9.0.0
   cupertino_icons: ^1.0.8
   dartz: ^0.10.1
   device_preview: ^1.0.0

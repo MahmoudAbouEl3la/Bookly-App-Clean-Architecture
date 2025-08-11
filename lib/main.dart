@@ -26,6 +26,7 @@ class BooklyApp extends StatelessWidget {
       ),
       routerConfig: AppRouter.router,
       useInheritedMediaQuery: true,
+
       locale: DevicePreview.locale(context),
       builder: DevicePreview.appBuilder,
       debugShowCheckedModeBanner: false,
