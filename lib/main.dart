@@ -1,4 +1,5 @@
 import 'package:bookly_app_with_clean_architecture/constans.dart';
+import 'package:bookly_app_with_clean_architecture/core/functions/setup_service_locator.dart';
 import 'package:bookly_app_with_clean_architecture/core/utilis/app_router.dart';
 import 'package:bookly_app_with_clean_architecture/features/home/domain/entities/book_entity.dart';
 import 'package:device_preview/device_preview.dart';
@@ -11,6 +12,7 @@ void main() async {
   Hive.registerAdapter(BookEntityAdapter());
   await Hive.openBox<BookEntity>(kFeaturedBox);
   await Hive.openBox<BookEntity>(kNewestBox);
+  setupServiceLocator();
   runApp(DevicePreview(enabled: true, builder: (context) => BooklyApp()));
 }
 
