@@ -22,7 +22,10 @@ class BookDetailsViewBody extends StatelessWidget {
               SizedBox(height: height * 0.027),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: width * 0.25),
-                child: Container(color: Colors.white, child: CustomBookImage()),
+                child: Container(
+                  color: Colors.white,
+                  child: CustomBookImage(imageUrl: ""),
+                ),
               ),
               SizedBox(height: height * 0.048),
               Column(

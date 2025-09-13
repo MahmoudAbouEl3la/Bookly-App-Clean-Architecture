@@ -1,20 +1,65 @@
-import 'package:bookly_app_with_clean_architecture/features/home/presentation/views/widgets/featured_books_list_view_home_item.dart';
+import 'package:bookly_app_with_clean_architecture/core/widgets/custom_book_image.dart';
+import 'package:bookly_app_with_clean_architecture/features/home/domain/entities/book_entity.dart';
+import 'package:bookly_app_with_clean_architecture/features/home/domain/manager/featured_book_cubit/featured_book_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class FeaturedBooksListView extends StatelessWidget {
-  const FeaturedBooksListView({super.key});
+class FeaturedBooksListView extends StatefulWidget {
+  const FeaturedBooksListView({super.key, required this.books});
+  final List<BookEntity> books;
+
+  @override
+  State<FeaturedBooksListView> createState() => _FeaturedBooksListViewState();
+}
+
+class _FeaturedBooksListViewState extends State<FeaturedBooksListView> {
+  late final ScrollController _scrollController;
+  var nextPage = 1;
+  bool isLoading = false;
+  static const double _triggerPercent = 70;
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController = ScrollController();
+    _scrollController.addListener(onScroll);
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  void onScroll() async {
+    if (!_scrollController.hasClients) return;
+    var maxScrollLength = _scrollController.position.maxScrollExtent;
+    if (maxScrollLength <= 0) return;
+    var currentPosition = _scrollController.position.pixels;
+    var distance = (currentPosition / maxScrollLength) * 100;
+    if (distance >= _triggerPercent && !isLoading) {
+      if (!isLoading) {
+        isLoading = true;
+        await BlocProvider.of<FeaturedBookCubit>(
+          context,
+        ).fetchFeaturedBooks(page: nextPage++);
+        isLoading = false;
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: MediaQuery.sizeOf(context).height * 0.3,
       child: ListView.builder(
-        itemCount: 5,
+        controller: _scrollController,
+        itemCount: widget.books.length,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
           return Padding(
             padding: const EdgeInsets.only(right: 8),
-            child: const FeaturedListViewItem(),
+            child: CustomBookImage(imageUrl: widget.books[index].image ?? ""),
           );
         },
       ),

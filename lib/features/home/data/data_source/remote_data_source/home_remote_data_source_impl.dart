@@ -10,16 +10,10 @@ class HomeRemoteDataSourceImp extends HomeRemoteDataSource {
   final ApiService apiService;
   HomeRemoteDataSourceImp(this.apiService);
   @override
-  /// Fetches a list of featured books related to programming that are available as free ebooks.
-  ///
-  /// This method sends a GET request to the API endpoint with the query parameters
-  /// for programming books and free ebooks filtering. It then parses the response
-  /// data into a list of [BookEntity] objects.
-  ///
-  /// Returns a [Future] that completes with a list of [BookEntity]s.
-  Future<List<BookEntity>> fetchFeaturedBooks() async {
+  Future<List<BookEntity>> fetchFeaturedBooks({int page = 0}) async {
     final data = await apiService.get(
-      endPoint: "volumes?q=programming&Filtering=free-ebooks",
+      endPoint:
+          "volumes?q=programming&Filtering=free-ebooks&startIndex=${page * 10}",
     );
     List<BookEntity> books = getBooksList(data);
     saveLocalBooksData(books, kFeaturedBox);
@@ -27,14 +21,6 @@ class HomeRemoteDataSourceImp extends HomeRemoteDataSource {
   }
 
   @override
-  /// Fetches a list of the newest programming books available as free ebooks.
-  ///
-  /// This method sends a GET request to the API endpoint with query parameters
-  /// that filter for programming books, restrict results to free ebooks, and sort
-  /// them by newest first. The response data is then parsed into a list of
-  /// [BookEntity] objects.
-  ///
-  /// Returns a [Future] that completes with a list of the newest [BookEntity]s.
   Future<List<BookEntity>> fetchNewestBooks() async {
     final data = await apiService.get(
       endPoint: "volumes?q=programming&Filtering=free-ebooks&sorting=newest",
@@ -44,14 +30,6 @@ class HomeRemoteDataSourceImp extends HomeRemoteDataSource {
     return books;
   }
 
-  /// Parses a list of book items from the provided API response data and returns a list of [BookEntity] objects.
-  ///
-  /// This function expects the [data] map to contain an "items" key, whose value is a list of book data maps.
-  /// Each item in the list is converted into a [BookEntity] using [BookModel.fromJson].
-  ///
-  /// - [data]: The API response map containing a list of book items under the "items" key.
-  ///
-  /// Returns a list of [BookEntity] objects parsed from the input data.
   List<BookEntity> getBooksList(Map<String, dynamic> data) {
     List<BookEntity> books = [];
     for (var item in data["items"]) {

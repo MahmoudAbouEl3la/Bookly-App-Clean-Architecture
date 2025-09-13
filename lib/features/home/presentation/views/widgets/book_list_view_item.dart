@@ -15,7 +15,7 @@ class BookListViewItem extends StatelessWidget {
 
       child: Row(
         children: [
-          CustomBookImage(),
+          CustomBookImage(imageUrl: ""),
           Expanded(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
