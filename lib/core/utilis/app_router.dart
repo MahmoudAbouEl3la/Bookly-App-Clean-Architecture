@@ -1,5 +1,6 @@
 import 'package:bookly_app_with_clean_architecture/core/utilis/routes.dart';
-import 'package:bookly_app_with_clean_architecture/features/home/presentation/views/book_details_view.dart';
+import 'package:bookly_app_with_clean_architecture/features/home/domain/entities/book_entity.dart';
+import 'package:bookly_app_with_clean_architecture/features/home/presentation/views/widgets/book_details/book_details_view.dart';
 import 'package:bookly_app_with_clean_architecture/features/home/presentation/views/home_view.dart';
 import 'package:bookly_app_with_clean_architecture/features/search/presentation/search_view.dart';
 import 'package:bookly_app_with_clean_architecture/features/splash/presentation/view/splash_view.dart';
@@ -24,7 +25,8 @@ abstract class AppRouter {
       GoRoute(
         path: Routes.bookDetailsView,
         builder: (BuildContext context, GoRouterState state) {
-          return const BookDetailsView();
+          final book = state.extra as BookEntity;
+          return BookDetailsView(book: book);
         },
       ),
       GoRoute(

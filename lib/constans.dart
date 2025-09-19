@@ -5,6 +5,7 @@ const kTransitiionDuration = Duration(milliseconds: 350);
 const kGtSectraFine = 'GT Sectra Fine';
 const kFeaturedBox = "featuredBox";
 const kNewestBox = "newestBox";
+const kSimilarBox = "similarBox";
 
 class ImagePath {
   static const String kLogoImage = 'assets/images/Logo.png';

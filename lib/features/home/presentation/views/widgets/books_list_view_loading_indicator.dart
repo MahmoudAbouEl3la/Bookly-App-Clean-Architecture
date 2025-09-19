@@ -2,8 +2,8 @@ import 'package:bookly_app_with_clean_architecture/core/widgets/custom_fading_wi
 import 'package:bookly_app_with_clean_architecture/features/home/presentation/views/widgets/custom_book_image_loading_indicator.dart';
 import 'package:flutter/material.dart';
 
-class FeaturedBookdListViewLoadingIndicator extends StatelessWidget {
-  const FeaturedBookdListViewLoadingIndicator({super.key});
+class BooksListViewLoadingIndicator extends StatelessWidget {
+  const BooksListViewLoadingIndicator({super.key});
 
   @override
   Widget build(BuildContext context) {

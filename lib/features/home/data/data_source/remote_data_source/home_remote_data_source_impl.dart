@@ -9,11 +9,12 @@ import 'package:bookly_app_with_clean_architecture/features/home/domain/entities
 class HomeRemoteDataSourceImp extends HomeRemoteDataSource {
   final ApiService apiService;
   HomeRemoteDataSourceImp(this.apiService);
+
   @override
   Future<List<BookEntity>> fetchFeaturedBooks({int page = 0}) async {
     final data = await apiService.get(
       endPoint:
-          "volumes?q=programming&Filtering=free-ebooks&startIndex=${page * 10}",
+          "volumes?q=programming&filter=free-ebooks&startIndex=${page * 10}",
     );
     List<BookEntity> books = getBooksList(data);
     saveLocalBooksData(books, kFeaturedBox);
@@ -21,19 +22,32 @@ class HomeRemoteDataSourceImp extends HomeRemoteDataSource {
   }
 
   @override
-  Future<List<BookEntity>> fetchNewestBooks() async {
+  Future<List<BookEntity>> fetchNewestBooks({int page = 0}) async {
     final data = await apiService.get(
-      endPoint: "volumes?q=programming&Filtering=free-ebooks&sorting=newest",
+      endPoint:
+          "volumes?Filtering=free-ebooks&Sorting=newest&q=computer-science&startIndex=${page * 10}",
     );
     List<BookEntity> books = getBooksList(data);
     saveLocalBooksData(books, kNewestBox);
     return books;
   }
 
+  @override
+  Future<List<BookEntity>> fetchSimilarBooks({int page = 0}) async {
+    final data = await apiService.get(
+      endPoint: "volumes?Filtering=free-ebooks&q=art&startIndex=${page * 10}",
+    );
+    List<BookEntity> books = getBooksList(data);
+    saveLocalBooksData(books, kSimilarBox);
+    return books;
+  }
+
   List<BookEntity> getBooksList(Map<String, dynamic> data) {
     List<BookEntity> books = [];
-    for (var item in data["items"]) {
-      books.add(BookModel.fromJson(item));
+    if (data["items"] != null) {
+      for (var item in data["items"]) {
+        books.add(BookModel.fromJson(item));
+      }
     }
     return books;
   }

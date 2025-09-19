@@ -1,7 +1,7 @@
 import 'package:bookly_app_with_clean_architecture/features/home/domain/manager/featured_book_cubit/featured_book_cubit.dart';
 import 'package:bookly_app_with_clean_architecture/features/home/domain/manager/featured_book_cubit/featured_book_state.dart';
-import 'package:bookly_app_with_clean_architecture/features/home/presentation/views/widgets/featured_bookd_list_view_loading_indicator.dart';
-import 'package:bookly_app_with_clean_architecture/features/home/presentation/views/widgets/featured_books_list_view.dart';
+import 'package:bookly_app_with_clean_architecture/features/home/presentation/views/widgets/books_list_view_loading_indicator.dart';
+import 'package:bookly_app_with_clean_architecture/features/home/presentation/views/widgets/featured_books/featured_books_list_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -38,7 +38,8 @@ class FeaturedBooksListViewBlocBuilder extends StatelessWidget {
                 child: Padding(
                   padding: EdgeInsets.all(8.0),
                   child: CircularProgressIndicator(
-                    strokeWidth: 2,
+                    strokeWidth: 3,
+                    backgroundColor: Colors.blueGrey,
                     color: Colors.amber,
                   ),
                 ),
@@ -46,7 +47,7 @@ class FeaturedBooksListViewBlocBuilder extends StatelessWidget {
             ],
           );
         }
-        return const Center(child: FeaturedBookdListViewLoadingIndicator());
+        return const Center(child: BooksListViewLoadingIndicator());
       },
     );
   }

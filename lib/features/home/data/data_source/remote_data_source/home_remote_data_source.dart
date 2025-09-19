@@ -2,5 +2,6 @@ import 'package:bookly_app_with_clean_architecture/features/home/domain/entities
 
 abstract class HomeRemoteDataSource {
   Future<List<BookEntity>> fetchFeaturedBooks({int page = 0});
-  Future<List<BookEntity>> fetchNewestBooks();
+  Future<List<BookEntity>> fetchNewestBooks({int page = 0});
+  Future<List<BookEntity>> fetchSimilarBooks({int page = 0});
 }

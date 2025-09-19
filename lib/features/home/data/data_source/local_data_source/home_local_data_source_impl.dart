@@ -8,7 +8,6 @@ class HomeLocalDataSourceImpl extends HomeLocalDataSource {
   List<BookEntity> fetchFeaturedBooks({int page = 0}) {
     int startIndex = page * 10;
     int endIndex = (page + 1) * 10;
-
     final box = Hive.box<BookEntity>(kFeaturedBox);
     var length = box.values.length;
     if (startIndex >= length) return [];
@@ -17,8 +16,24 @@ class HomeLocalDataSourceImpl extends HomeLocalDataSource {
   }
 
   @override
-  List<BookEntity> fetchNewestBooks() {
+  List<BookEntity> fetchNewestBooks({int page = 0}) {
+    int startIndex = page * 10;
+    int endIndex = (page + 1) * 10;
     final box = Hive.box<BookEntity>(kNewestBox);
-    return box.values.toList();
+    var length = box.values.length;
+    if (startIndex >= length) return [];
+    if (endIndex > length) endIndex = length;
+    return box.values.toList().sublist(startIndex, endIndex);
+  }
+
+  @override
+  List<BookEntity> fetchSimilarBooks({int page = 0}) {
+    int startIndex = page * 10;
+    int endIndex = (page + 1) * 10;
+    final box = Hive.box<BookEntity>(kSimilarBox);
+    var length = box.values.length;
+    if (startIndex >= length) return [];
+    if (endIndex > length) endIndex = length;
+    return box.values.toList().sublist(startIndex, endIndex);
   }
 }

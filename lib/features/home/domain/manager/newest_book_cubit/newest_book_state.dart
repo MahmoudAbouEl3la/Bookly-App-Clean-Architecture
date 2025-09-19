@@ -6,12 +6,22 @@ class NewestBookInitial extends NewestBookState {}
 
 class NewestBookLoading extends NewestBookState {}
 
+class NewestBookFailure extends NewestBookState {
+  final String errorMessage;
+  NewestBookFailure(this.errorMessage);
+}
+
 class NewestBookSuccess extends NewestBookState {
   final List<BookEntity> books;
   NewestBookSuccess(this.books);
 }
 
-class NewestBookFailure extends NewestBookState {
+class NewestBookPaginationLoading extends NewestBookState {
+  final List<BookEntity> books;
+  NewestBookPaginationLoading(this.books);
+}
+
+class NewestBookPaginationFailure extends NewestBookState {
   final String errorMessage;
-  NewestBookFailure(this.errorMessage);
+  NewestBookPaginationFailure(this.errorMessage);
 }
