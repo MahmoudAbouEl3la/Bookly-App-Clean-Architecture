@@ -59,9 +59,10 @@ class _SimilarBooksListViewState extends State<SimilarBooksListView> {
       itemBuilder: (context, index) {
         return GestureDetector(
           onTap: () {
-            GoRouter.of(
-              context,
-            ).push(Routes.bookDetailsView, extra: widget.book[index]);
+            GoRouter.of(context).pushReplacement(
+              Routes.bookDetailsView,
+              extra: widget.book[index],
+            );
           },
           child: Padding(
             padding: const EdgeInsets.only(right: 8),
