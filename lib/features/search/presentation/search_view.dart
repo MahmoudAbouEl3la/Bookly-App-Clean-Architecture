@@ -1,4 +1,4 @@
-import 'package:bookly_app_with_clean_architecture/features/search/presentation/view/widgets/search_view_body.dart';
+import 'package:bookly_app_with_clean_architecture/features/search/presentation/widgets/search_view_body.dart';
 import 'package:flutter/material.dart';
 
 class SearchView extends StatelessWidget {
@@ -6,6 +6,11 @@ class SearchView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(child: Scaffold(body: SearchViewBody()));
+    return GestureDetector(
+      onTap: () {
+        FocusScope.of(context).unfocus();
+      },
+      child: Scaffold(body: SearchViewBody()),
+    );
   }
 }

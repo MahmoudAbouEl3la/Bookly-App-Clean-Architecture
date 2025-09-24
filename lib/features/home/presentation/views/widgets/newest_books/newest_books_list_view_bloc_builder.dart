@@ -1,3 +1,4 @@
+import 'package:bookly_app_with_clean_architecture/features/home/presentation/views/widgets/books_list_view_loading_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:bookly_app_with_clean_architecture/features/home/domain/manager/newest_book_cubit/newest_book_cubit.dart';
@@ -27,7 +28,6 @@ class NewestBooksListViewBlocBuilder extends StatelessWidget {
         } else if (state is NewestBookSuccess) {
           return NewestBooksListView(books: state.books);
         } else if (state is NewestBookPaginationLoading) {
-          // استعمل الـ oldBooks من الحالة (حسب تعريفك الحالي للحالة)
           final oldBooks = state.books;
           return NewestBooksListView(
             books: oldBooks,
@@ -35,7 +35,7 @@ class NewestBooksListViewBlocBuilder extends StatelessWidget {
           );
         }
 
-        return const SliverToBoxAdapter(child: SizedBox.shrink());
+        return const SliverToBoxAdapter(child: BooksListViewLoadingIndicator());
       },
     );
   }

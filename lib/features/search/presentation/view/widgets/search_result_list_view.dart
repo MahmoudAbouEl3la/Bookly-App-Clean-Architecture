@@ -1,5 +1,5 @@
 import 'package:bookly_app_with_clean_architecture/features/home/domain/entities/book_entity.dart';
-import 'package:bookly_app_with_clean_architecture/features/home/presentation/views/widgets/newest_books/newest_book_list_view_item.dart';
+import 'package:bookly_app_with_clean_architecture/features/home/presentation/views/widgets/newest_books/newest_books_list_view.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -19,11 +19,11 @@ class SearchResultListView extends StatelessWidget {
             onTap: () {
               GoRouter.of(context).push('/bookDetailsView');
             },
-            child: NewestBookListViewItem(bookEntity: books[index]),
+            child: NewestBooksListView(books: books),
           ),
         );
       },
-      itemCount: 5,
+      itemCount: books.length,
       scrollDirection: Axis.vertical,
     );
   }

@@ -21,10 +21,10 @@ class NewestBookListViewItem extends StatelessWidget {
           ),
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8),
+              padding: const EdgeInsets.symmetric(horizontal: 18),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   SizedBox(
                     width: MediaQuery.sizeOf(context).width * 0.8,
@@ -40,7 +40,7 @@ class NewestBookListViewItem extends StatelessWidget {
                   const SizedBox(height: 4),
                   Text(
                     bookEntity.authorName.toString(),
-                    style: Styles.font16W600.copyWith(color: Colors.grey),
+                    style: Styles.font15Normal.copyWith(color: Colors.grey),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -52,7 +52,7 @@ class NewestBookListViewItem extends StatelessWidget {
                         bookEntity.price == 0
                             ? "Free"
                             : bookEntity.price.toString(),
-                        style: Styles.font16W600.copyWith(
+                        style: Styles.font15Normal.copyWith(
                           fontWeight: FontWeight.bold,
                         ),
                       ),
