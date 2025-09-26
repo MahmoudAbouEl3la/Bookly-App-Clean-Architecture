@@ -11,8 +11,6 @@ class BookAction extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.sizeOf(context).width;
-    print("🎯 BookAction -> previewLink: ${bookEntity.previewLink}"); // DEBUG
-
     return SizedBox(
       width: width * 0.8,
       child: Row(

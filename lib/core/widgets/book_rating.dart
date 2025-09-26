@@ -28,7 +28,7 @@ class BookRating extends StatelessWidget {
         Text((bookRating.rating ?? 4.8).toString(), style: Styles.font15Normal),
         const SizedBox(width: 5),
         Text(
-          "(${ratingsCount.toString()})",
+          "(${ratingsCount ?? 0})",
           style: Styles.font14Normal.copyWith(
             color: const Color(0xFF707070),
             fontWeight: FontWeight.w600,
