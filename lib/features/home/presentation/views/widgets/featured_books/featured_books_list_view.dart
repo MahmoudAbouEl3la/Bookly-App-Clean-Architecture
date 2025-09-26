@@ -53,26 +53,22 @@ class _FeaturedBooksListViewState extends State<FeaturedBooksListView> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: MediaQuery.sizeOf(context).height * 0.3,
+      height: MediaQuery.sizeOf(context).height * 0.28,
       child: ListView.builder(
+        key: const PageStorageKey('featured_books_key'),
         controller: _scrollController,
         itemCount: widget.books.length,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
           return Padding(
-            padding: const EdgeInsets.only(right: 8),
+            padding: const EdgeInsets.symmetric(horizontal: 8),
             child: GestureDetector(
               onTap: () {
                 GoRouter.of(
                   context,
                 ).push(Routes.bookDetailsView, extra: widget.books[index]);
               },
-              child: ClipRRect(
-                borderRadius: BorderRadius.all(Radius.circular(8)),
-                child: CustomBookImage(
-                  imageUrl: widget.books[index].image ?? "",
-                ),
-              ),
+              child: CustomBookImage(imageUrl: widget.books[index].image ?? ""),
             ),
           );
         },

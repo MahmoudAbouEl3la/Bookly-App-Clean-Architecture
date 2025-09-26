@@ -60,6 +60,8 @@ class _SearchBooksListViewState extends State<SearchBooksListView> {
   Widget build(BuildContext context) {
     return Expanded(
       child: ListView.builder(
+        key: const PageStorageKey('search_books_listview_key'),
+
         controller: scrollController,
         physics: const BouncingScrollPhysics(),
         padding: EdgeInsets.zero,

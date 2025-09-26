@@ -20,6 +20,7 @@ class NewestBooksListView extends StatelessWidget {
     final childCount = books.length + (showLoadingIndicatorAtEnd ? 1 : 0);
 
     return SliverList(
+      key: const PageStorageKey('newest_books_key'),
       delegate: SliverChildBuilderDelegate((context, index) {
         if (index < books.length) {
           final book = books[index];

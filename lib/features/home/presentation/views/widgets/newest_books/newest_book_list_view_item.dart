@@ -15,10 +15,7 @@ class NewestBookListViewItem extends StatelessWidget {
       height: MediaQuery.sizeOf(context).height * 0.16,
       child: Row(
         children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(8),
-            child: CustomBookImage(imageUrl: bookEntity.image ?? ""),
-          ),
+          CustomBookImage(imageUrl: bookEntity.image ?? ""),
           Expanded(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 18),

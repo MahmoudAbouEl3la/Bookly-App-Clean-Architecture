@@ -26,10 +26,7 @@ class BookDetailsViewBody extends StatelessWidget {
                 SizedBox(height: height * 0.027),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: width * 0.25),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(8),
-                    child: CustomBookImage(imageUrl: book.image ?? ""),
-                  ),
+                  child: CustomBookImage(imageUrl: book.image ?? ""),
                 ),
                 SizedBox(height: height * 0.048),
                 Column(
@@ -38,7 +35,7 @@ class BookDetailsViewBody extends StatelessWidget {
                   children: [
                     BookDetailsSection(book: book),
                     const SizedBox(height: 40),
-                    SimilarBookAction(height: height),
+                    SimilarBookAction(height: height, bookEntity: book),
                     SizedBox(height: 60),
                   ],
                 ),

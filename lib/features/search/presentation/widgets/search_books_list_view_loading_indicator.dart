@@ -8,6 +8,8 @@ class SearchBooksListViewLoadingIndicator extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomFadingWidget(
       child: ListView.builder(
+        key: const PageStorageKey('search_books_listview_key'),
+
         itemCount: 8,
         padding: EdgeInsets.zero,
         physics: const BouncingScrollPhysics(),
