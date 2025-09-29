@@ -1,3 +1,5 @@
+import 'package:bookly_app_with_clean_architecture/constans.dart';
+import 'package:bookly_app_with_clean_architecture/core/extensions/context_extension.dart';
 import 'package:bookly_app_with_clean_architecture/features/search/domain/manager/search_books_cubit/search_books_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -32,11 +34,27 @@ class _CustomTextFieldSearchPageState extends State<CustomTextFieldSearchPage> {
     super.dispose();
   }
 
+  OutlineInputBorder _borderStyle() {
+    final isDark = context.isDarkMode;
+    return OutlineInputBorder(
+      borderRadius: BorderRadius.circular(12),
+      borderSide: BorderSide(
+        color: isDark ? kGreyColor : kSecondaryColor,
+        width: 1,
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    final isDark = context.isDarkMode;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10),
       child: TextField(
+        style: TextStyle(
+          fontSize: 14,
+          color: isDark ? kGreyColor : kSecondaryColor,
+        ),
         controller: textEditingController,
         onSubmitted: (value) {
           final query = value.trim();
@@ -46,13 +64,15 @@ class _CustomTextFieldSearchPageState extends State<CustomTextFieldSearchPage> {
         },
         decoration: InputDecoration(
           filled: true,
-          fillColor: const Color(0x832E2158),
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12),
-            borderSide: BorderSide(),
-          ),
+          fillColor: isDark ? const Color(0xFF32244D) : kGreyColor,
+          enabledBorder: _borderStyle(),
+          focusedBorder: _borderStyle(),
+          disabledBorder: _borderStyle(),
           hintText: 'Search',
-          hintStyle: TextStyle(fontSize: 14),
+          hintStyle: TextStyle(
+            fontSize: 14,
+            color: isDark ? kGreyColor : kSecondaryColor,
+          ),
           suffixIcon: IconButton(
             onPressed: () {
               final query = textEditingController.text.trim();
@@ -62,7 +82,10 @@ class _CustomTextFieldSearchPageState extends State<CustomTextFieldSearchPage> {
                 ).fetchSearchBooks(query: query);
               }
             },
-            icon: Icon(Icons.search_rounded),
+            icon: Icon(
+              Icons.search_rounded,
+              color: isDark ? kGreyColor : kSecondaryColor,
+            ),
           ),
         ),
       ),

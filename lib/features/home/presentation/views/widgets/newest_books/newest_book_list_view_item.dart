@@ -1,4 +1,5 @@
 import 'package:bookly_app_with_clean_architecture/constans.dart';
+import 'package:bookly_app_with_clean_architecture/core/extensions/context_extension.dart';
 import 'package:bookly_app_with_clean_architecture/core/styles.dart';
 import 'package:bookly_app_with_clean_architecture/core/widgets/custom_book_image.dart';
 import 'package:bookly_app_with_clean_architecture/core/widgets/book_rating.dart';
@@ -11,8 +12,12 @@ class NewestBookListViewItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: MediaQuery.sizeOf(context).height * 0.16,
+    final isDark = context.isDarkMode;
+    return ConstrainedBox(
+      constraints: BoxConstraints(
+        minHeight: MediaQuery.sizeOf(context).height * 0.16,
+        maxHeight: MediaQuery.sizeOf(context).height * 0.175,
+      ),
       child: Row(
         children: [
           CustomBookImage(imageUrl: bookEntity.image ?? ""),
@@ -31,13 +36,17 @@ class NewestBookListViewItem extends StatelessWidget {
                       bookEntity.title,
                       style: Styles.font20Normal.copyWith(
                         fontFamily: kGtSectraFine,
+                        color: isDark ? kSecondaryColor : kPrimaryColor,
                       ),
                     ),
                   ),
                   const SizedBox(height: 4),
                   Text(
                     bookEntity.authorName.toString(),
-                    style: Styles.font15Normal.copyWith(color: Colors.grey),
+                    style: Styles.font15Normal.copyWith(
+                      color: kGreyColor,
+                      fontWeight: FontWeight.w600,
+                    ),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -51,6 +60,7 @@ class NewestBookListViewItem extends StatelessWidget {
                             : bookEntity.price.toString(),
                         style: Styles.font15Normal.copyWith(
                           fontWeight: FontWeight.bold,
+                          color: isDark ? kSecondaryColor : kPrimaryColor,
                         ),
                       ),
                       BookRating(bookRating: bookEntity),

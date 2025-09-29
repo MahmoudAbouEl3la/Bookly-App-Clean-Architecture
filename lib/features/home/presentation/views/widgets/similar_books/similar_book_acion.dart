@@ -1,3 +1,5 @@
+import 'package:bookly_app_with_clean_architecture/constans.dart';
+import 'package:bookly_app_with_clean_architecture/core/extensions/context_extension.dart';
 import 'package:bookly_app_with_clean_architecture/core/styles.dart';
 import 'package:bookly_app_with_clean_architecture/features/home/domain/entities/book_entity.dart';
 import 'package:bookly_app_with_clean_architecture/features/home/domain/manager/similar_book_cubit.dart/similar_book_cubit.dart';
@@ -18,12 +20,17 @@ class SimilarBookAction extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = context.isDarkMode;
     final query = bookEntity.title.split(" ").first;
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text("You may also like", style: Styles.font14Normal),
+        Text(
+          "You may also like",
+          style: Styles.font14Normal.copyWith(
+            color: isDark ? kSecondaryColor : kPrimaryColor,
+          ),
+        ),
         const SizedBox(height: 6),
         SizedBox(
           height: height * 0.12,

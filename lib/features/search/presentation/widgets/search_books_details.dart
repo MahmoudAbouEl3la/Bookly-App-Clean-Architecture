@@ -1,4 +1,5 @@
 import 'package:bookly_app_with_clean_architecture/constans.dart';
+import 'package:bookly_app_with_clean_architecture/core/extensions/context_extension.dart';
 import 'package:bookly_app_with_clean_architecture/core/styles.dart';
 import 'package:bookly_app_with_clean_architecture/core/widgets/raring_and_price.dart';
 import 'package:bookly_app_with_clean_architecture/features/home/domain/entities/book_entity.dart';
@@ -10,6 +11,7 @@ class SearchBooksDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = context.isDarkMode;
     return Expanded(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8),
@@ -19,7 +21,10 @@ class SearchBooksDetails extends StatelessWidget {
           children: [
             Text(
               bookEntity.title,
-              style: Styles.font20Normal.copyWith(fontFamily: kGtSectraFine),
+              style: Styles.font20Normal.copyWith(
+                fontFamily: kGtSectraFine,
+                color: isDark ? kSecondaryColor : kPrimaryColor,
+              ),
               overflow: TextOverflow.ellipsis,
               maxLines: 2,
             ),

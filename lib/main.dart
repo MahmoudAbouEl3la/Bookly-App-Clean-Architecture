@@ -1,5 +1,8 @@
 import 'package:bookly_app_with_clean_architecture/constans.dart';
 import 'package:bookly_app_with_clean_architecture/core/functions/setup_service_locator.dart';
+import 'package:bookly_app_with_clean_architecture/core/settings/theme/app_theme.dart';
+import 'package:bookly_app_with_clean_architecture/core/settings/theme/app_theme_cubit/app_theme_cubit.dart';
+import 'package:bookly_app_with_clean_architecture/core/settings/theme/app_theme_cubit/app_theme_state.dart';
 import 'package:bookly_app_with_clean_architecture/core/utilis/app_router.dart';
 import 'package:bookly_app_with_clean_architecture/core/utilis/simple_bloc_observer.dart';
 import 'package:bookly_app_with_clean_architecture/features/home/data/repos_impl/home_repo_impl.dart';
@@ -22,6 +25,7 @@ void main() async {
   await Hive.openBox<BookEntity>(kFeaturedBox);
   await Hive.openBox<BookEntity>(kNewestBox);
   await Hive.openBox<BookEntity>(kSimilarBox);
+  await Hive.openBox('settings');
 
   Bloc.observer = SimpleBlocObserver();
   setupServiceLocator();
@@ -54,16 +58,23 @@ class BooklyApp extends StatelessWidget {
                 FetchSearchBooksUseCase(getIt.get<SearchReposImpl>()),
               ),
         ),
+        BlocProvider(create: (context) => AppThemeCubit()),
       ],
-      child: MaterialApp.router(
-        theme: ThemeData.dark().copyWith(
-          scaffoldBackgroundColor: kPrimaryColor,
-          textTheme: GoogleFonts.montserratTextTheme(
-            ThemeData.dark().textTheme,
-          ),
-        ),
-        routerConfig: AppRouter.router,
-        debugShowCheckedModeBanner: false,
+      child: BlocBuilder<AppThemeCubit, AppThemeState>(
+        builder: (context, state) {
+          final themeCubit = AppThemeCubit.get(context);
+          return MaterialApp.router(
+            theme: AppTheme.lightTheme.copyWith(
+              textTheme: GoogleFonts.montserratTextTheme(),
+            ),
+            darkTheme: AppTheme.darkTheme.copyWith(
+              textTheme: GoogleFonts.montserratTextTheme(),
+            ),
+            themeMode: themeCubit.getTheme(),
+            routerConfig: AppRouter.router,
+            debugShowCheckedModeBanner: false,
+          );
+        },
       ),
     );
   }

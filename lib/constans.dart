@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 const kPrimaryColor = Color(0xff100b20);
+const kSecondaryColor = Color(0xffffffff);
+const kGreyColor = Color(0xffaeaeae);
 const kTransitiionDuration = Duration(milliseconds: 350);
 const kGtSectraFine = 'GT Sectra Fine';
 const kFeaturedBox = "featuredBox";

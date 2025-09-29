@@ -1,3 +1,4 @@
+// newest_books_list_view_bloc_builder.dart
 import 'package:bookly_app_with_clean_architecture/features/home/presentation/views/widgets/books_list_view_loading_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,23 +15,24 @@ class NewestBooksListViewBlocBuilder extends StatelessWidget {
       builder: (context, state) {
         if (state is NewestBookFailure) {
           return SliverToBoxAdapter(
-            child: Center(child: Text(state.errorMessage)),
-          );
-        } else if (state is NewestBookLoading) {
-          return const SliverToBoxAdapter(
-            child: Center(
-              child: Padding(
-                padding: EdgeInsets.symmetric(vertical: 24),
-                child: CircularProgressIndicator(),
+            child: Padding(
+              padding: const EdgeInsets.all(24),
+              child: Center(
+                child: Text(state.errorMessage, textAlign: TextAlign.center),
               ),
             ),
+          );
+        } else if (state is NewestBookLoading) {
+          // لودر النص الأساسي
+          return const SliverFillRemaining(
+            hasScrollBody: false,
+            child: Center(child: CircularProgressIndicator()),
           );
         } else if (state is NewestBookSuccess) {
           return NewestBooksListView(books: state.books);
         } else if (state is NewestBookPaginationLoading) {
-          final oldBooks = state.books;
           return NewestBooksListView(
-            books: oldBooks,
+            books: state.books,
             showLoadingIndicatorAtEnd: true,
           );
         }

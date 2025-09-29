@@ -1,4 +1,5 @@
 import 'package:bookly_app_with_clean_architecture/constans.dart';
+import 'package:bookly_app_with_clean_architecture/core/extensions/context_extension.dart';
 import 'package:bookly_app_with_clean_architecture/core/styles.dart';
 import 'package:bookly_app_with_clean_architecture/core/widgets/book_rating.dart';
 import 'package:bookly_app_with_clean_architecture/features/home/domain/entities/book_entity.dart';
@@ -11,6 +12,8 @@ class BookDetailsSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = context.isDarkMode;
+
     return Column(
       children: [
         Text(
@@ -19,6 +22,7 @@ class BookDetailsSection extends StatelessWidget {
           style: Styles.font30Normal.copyWith(
             fontFamily: kGtSectraFine,
             fontWeight: FontWeight.w700,
+            color: isDark ? kSecondaryColor : kPrimaryColor,
           ),
         ),
         const SizedBox(height: 14),
@@ -28,8 +32,8 @@ class BookDetailsSection extends StatelessWidget {
             textAlign: TextAlign.center,
             book.authorName ?? "unknown",
             style: Styles.font18W600.copyWith(
-              color: Color(0xFFFFFFFF),
-              fontWeight: FontWeight.w500,
+              color: isDark ? kSecondaryColor : kGreyColor,
+              fontWeight: FontWeight.w600,
               fontStyle: FontStyle.italic,
             ),
           ),

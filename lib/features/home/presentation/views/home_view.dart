@@ -1,3 +1,5 @@
+import 'package:bookly_app_with_clean_architecture/constans.dart';
+import 'package:bookly_app_with_clean_architecture/core/extensions/context_extension.dart';
 import 'package:bookly_app_with_clean_architecture/features/home/presentation/views/widgets/home_view_body.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -7,6 +9,8 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = context.isDarkMode;
+
     return Scaffold(
       body: PopScope(
         canPop: false,
@@ -17,14 +21,26 @@ class HomeView extends StatelessWidget {
             context: context,
             builder:
                 (dialogContext) => AlertDialog(
-                  title: const Text("Exit App"),
-                  content: const Text("Are you sure you want to exit?"),
+                  title: Text(
+                    "Exit App",
+                    style: TextStyle(
+                      color: isDark ? kSecondaryColor : kPrimaryColor,
+                    ),
+                  ),
+                  content: Text(
+                    "Are you sure you want to exit?",
+                    style: TextStyle(
+                      color: isDark ? kSecondaryColor : kPrimaryColor,
+                    ),
+                  ),
                   actions: [
                     TextButton(
                       onPressed: () => Navigator.of(dialogContext).pop(false),
-                      child: const Text(
+                      child: Text(
                         "No",
-                        style: TextStyle(color: Colors.white),
+                        style: TextStyle(
+                          color: isDark ? kSecondaryColor : kPrimaryColor,
+                        ),
                       ),
                     ),
                     TextButton(

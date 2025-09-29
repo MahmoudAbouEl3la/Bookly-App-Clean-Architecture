@@ -1,4 +1,5 @@
 import 'package:bookly_app_with_clean_architecture/constans.dart';
+import 'package:bookly_app_with_clean_architecture/core/extensions/context_extension.dart';
 import 'package:bookly_app_with_clean_architecture/core/utilis/routes.dart';
 import 'package:bookly_app_with_clean_architecture/features/splash/presentation/view/widgets/sliding_text.dart';
 import 'package:flutter/material.dart';
@@ -31,11 +32,15 @@ class _SplashViewBodyState extends State<SplashViewBody>
 
   @override
   Widget build(BuildContext context) {
+    final isDark = context.isDarkMode;
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Image.asset(ImagePath.kLogoImage),
+        Image.asset(
+          ImagePath.kLogoImage,
+          color: isDark ? kSecondaryColor : kPrimaryColor,
+        ),
         const SizedBox(height: 4),
         SlidingText(slidingAnimation: slidingAnimation),
       ],

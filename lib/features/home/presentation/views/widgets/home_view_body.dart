@@ -1,3 +1,5 @@
+import 'package:bookly_app_with_clean_architecture/constans.dart';
+import 'package:bookly_app_with_clean_architecture/core/extensions/context_extension.dart';
 import 'package:bookly_app_with_clean_architecture/core/styles.dart';
 import 'package:bookly_app_with_clean_architecture/features/home/presentation/views/widgets/custom_app_bar.dart';
 import 'package:bookly_app_with_clean_architecture/features/home/presentation/views/widgets/featured_books/featured_books_list_view_bloc_builder.dart';
@@ -51,6 +53,7 @@ class _HomeViewBodyState extends State<HomeViewBody> {
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.sizeOf(context).height;
+    final isDark = context.isDarkMode;
 
     return CustomScrollView(
       controller: _scrollController, // 👈 كنترولر موحّد لكامل السك롤
@@ -65,9 +68,14 @@ class _HomeViewBodyState extends State<HomeViewBody> {
               ),
               const FeaturedBooksListViewBlocBuilder(),
               SizedBox(height: height * 0.055),
-              const Padding(
+              Padding(
                 padding: EdgeInsets.only(left: 20, right: 20, bottom: 20),
-                child: Text('Newest Books', style: Styles.font18W600),
+                child: Text(
+                  'Newest Books',
+                  style: Styles.font18W600.copyWith(
+                    color: isDark ? kSecondaryColor : kPrimaryColor,
+                  ),
+                ),
               ),
             ],
           ),

@@ -1,3 +1,4 @@
+// newest_books_list_view.dart
 import 'package:bookly_app_with_clean_architecture/core/utilis/routes.dart';
 import 'package:bookly_app_with_clean_architecture/features/home/domain/entities/book_entity.dart';
 import 'package:bookly_app_with_clean_architecture/features/home/presentation/views/widgets/newest_books/newest_book_list_view_item.dart';
@@ -16,7 +17,6 @@ class NewestBooksListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // عدد العناصر = عدد الكتب + عنصر واحد للّودر لو مطلوب
     final childCount = books.length + (showLoadingIndicatorAtEnd ? 1 : 0);
 
     return SliverList(
@@ -34,14 +34,17 @@ class NewestBooksListView extends StatelessWidget {
             ),
           );
         } else {
-          // العنصر الأخير: لودر للـ pagination
+          // لودر الـ pagination في الآخر فقط
           return const Padding(
-            padding: EdgeInsets.symmetric(vertical: 40),
+            padding: EdgeInsets.symmetric(vertical: 30),
             child: Center(
-              child: CircularProgressIndicator(
-                strokeWidth: 3,
-                backgroundColor: Colors.blueGrey,
-                color: Colors.amber,
+              child: SizedBox(
+                height: 26,
+                width: 26,
+                child: CircularProgressIndicator(
+                  strokeWidth: 3,
+                  color: Colors.amber,
+                ),
               ),
             ),
           );

@@ -1,3 +1,5 @@
+import 'package:bookly_app_with_clean_architecture/constans.dart';
+import 'package:bookly_app_with_clean_architecture/core/extensions/context_extension.dart';
 import 'package:bookly_app_with_clean_architecture/features/home/presentation/views/widgets/custom_book_image_loading_indicator.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -8,16 +10,26 @@ class CustomBookImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = context.isDarkMode;
+
     return AspectRatio(
       aspectRatio: 2.6 / 4,
       child: ClipRRect(
         borderRadius: BorderRadius.circular(10),
-        child: CachedNetworkImage(
-          fit: BoxFit.fill,
-          imageUrl: imageUrl,
-          placeholder:
-              (context, url) => const CustomBookImageLoadingIndicator(),
-          errorWidget: (context, url, error) => const Icon(Icons.error),
+        child: Container(
+          decoration: BoxDecoration(
+            border: Border.all(
+              color: isDark ? Colors.transparent : kGreyColor.withAlpha(70),
+              width: 1,
+            ),
+          ),
+          child: CachedNetworkImage(
+            fit: BoxFit.fill,
+            imageUrl: imageUrl,
+            placeholder:
+                (context, url) => const CustomBookImageLoadingIndicator(),
+            errorWidget: (context, url, error) => const Icon(Icons.error),
+          ),
         ),
       ),
     );

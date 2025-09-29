@@ -1,3 +1,5 @@
+import 'package:bookly_app_with_clean_architecture/constans.dart';
+import 'package:bookly_app_with_clean_architecture/core/settings/theme/app_theme_cubit/app_theme_cubit.dart';
 import 'package:bookly_app_with_clean_architecture/core/styles.dart';
 import 'package:bookly_app_with_clean_architecture/features/home/domain/entities/book_entity.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +18,9 @@ class BookRating extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeCubit = AppThemeCubit.get(context);
+    final isDark = themeCubit.currentTheme == ThemeModeState.dark;
+
     return Row(
       mainAxisAlignment: mainAxisAlignment ?? MainAxisAlignment.start,
       children: [
@@ -25,7 +30,12 @@ class BookRating extends StatelessWidget {
           size: 13.4,
         ),
         const SizedBox(width: 6),
-        Text((bookRating.rating ?? 4.8).toString(), style: Styles.font15Normal),
+        Text(
+          (bookRating.rating ?? 4.8).toString(),
+          style: Styles.font15Normal.copyWith(
+            color: isDark ? kSecondaryColor : kPrimaryColor,
+          ),
+        ),
         const SizedBox(width: 5),
         Text(
           "(${ratingsCount ?? 0})",

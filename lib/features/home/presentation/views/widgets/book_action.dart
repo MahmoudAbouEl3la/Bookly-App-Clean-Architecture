@@ -1,3 +1,4 @@
+import 'package:bookly_app_with_clean_architecture/constans.dart';
 import 'package:bookly_app_with_clean_architecture/core/styles.dart';
 import 'package:bookly_app_with_clean_architecture/core/widgets/custom_buton.dart';
 import 'package:bookly_app_with_clean_architecture/features/home/domain/entities/book_entity.dart';
@@ -17,6 +18,7 @@ class BookAction extends StatelessWidget {
         children: [
           Expanded(
             child: CustomButon(
+              side: BorderSide(color: kGreyColor.withAlpha(80), width: 0.5),
               title:
                   bookEntity.price != null && bookEntity.price != 0
                       ? "${bookEntity.price}€"
